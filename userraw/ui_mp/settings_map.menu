@@ -1,0 +1,1099 @@
+{
+	menuDef
+	{
+		name "settings_map"
+		rect 0 0 640 480 0 0
+		style 1
+		forecolor 1 1 1 1
+		focuscolor 1 1 1 1
+		fullscreen 1
+		soundLoop "music_mainmenu_mp"
+		onOpen
+		{
+			focusfirst;
+			setfocusbydvar "ui_mapname";
+		}
+		onClose
+		{
+			exec "xsessionupdate";
+		}
+		onEsc
+		{
+			close self;
+		}
+		itemDef
+		{
+			rect 0 0 640 480 4 4
+			decoration
+			visible 1
+			style 3
+			forecolor 1 1 1 1
+			background "mw2_main_background"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect 0 0 1708 480 0 0
+			decoration
+			visible 1
+			style 3
+			forecolor 1 1 1 0.5
+			background "mw2_main_cloud_overlay"
+			textscale 0.55
+			exp rect x ( ( 0 - 107 ) - ( ( float( milliseconds( ) % 60000 ) / 60000 ) * ( 854 ) ) )
+		}
+		itemDef
+		{
+			rect 0 0 -1708 -480 0 0
+			decoration
+			visible 1
+			style 3
+			forecolor 1 1 1 0.5
+			background "mw2_main_cloud_overlay"
+			textscale 0.55
+			exp rect x ( ( - 107 + 854 ) + ( ( float( milliseconds( ) % 50000 ) / 50000 ) * ( 854 ) ) )
+		}
+		itemDef
+		{
+			rect 0 0 640 480 4 4
+			style 3
+			decoration
+			visible 1
+			forecolor 1 0.59 1 0
+			background "mockup_bg_glow"
+			textscale 0.55
+			exp forecolor a ( ( ( sin( milliseconds( ) / 1500 ) + 1 ) * 0.25 ) + 0.25 )
+		}
+		itemDef
+		{
+			rect 0 0 640 480 4 4
+			style 3
+			decoration
+			visible 1
+			forecolor 1 0.59 1 0
+			background "mockup_bg_glow"
+			textscale 0.55
+			exp forecolor a ( ( ( sin( milliseconds( ) / 480 ) + 1 ) * 0.25 ) + 0.25 )
+		}
+		itemDef
+		{
+			rect -64 0 280 480 1 0
+			style 3
+			decoration
+			visible 1
+			forecolor 0 0 0 0.25
+			background "gradient_fadein_fadebottom"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect 0 28 640 356 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 1 1 1 0.15
+			background "white"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect -32 -4 32 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_tl"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 0 -4 640 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_t"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 640 -4 32 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_tr"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 640 28 32 356 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_r"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 640 384 32 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_br"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 0 384 640 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_b"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect -32 384 32 32 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_bl"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect -32 28 32 356 4 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_l"
+			textscale 0.55
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			rect 0 0 272 28 1 1
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 9
+			textalign 6
+			textalignx -60
+			textscale 0.5
+			text "@MENU_CHOOSE_MAP_CAP"
+		}
+		itemDef
+		{
+			rect -64 48 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_afghan" }
+			exp text ( "@" + "MPUI_AFGHAN" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_afghan";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_AFGHAN" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_AFGHAN" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_afghan" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 68 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_complex" }
+			exp text ( "Bailout" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_complex";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Bailout" );
+				;;
+				setLocalVarString "ui_info_desc" ( "Overrun apartment complex. Long sight lines with great flank routes." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_complex" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 88 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_compact" }
+			exp text ( "Salvage" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_compact";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Salvage" );
+				;;
+				setLocalVarString "ui_info_desc" ( "A snow-covered junkyard. Lots of fast-paced action." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_compact" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 108 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_favela" }
+			exp text ( "@" + "MPUI_FAVELA" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_favela";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_FAVELA" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_FAVELA" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_favela" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 128 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_highrise" }
+			exp text ( "@" + "MPUI_HIGHRISE" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_highrise";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_HIGHRISE" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_HIGHRISE" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_highrise" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 148 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_abandon" }
+			exp text ( "Carnival" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_abandon";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Carnival" );
+				;;
+				setLocalVarString "ui_info_desc" ( "Large abandoned theme park. Great for all game modes." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_abandon" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 168 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_trailerpark" }
+			exp text ( "Trailer Park" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_trailerpark";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Trailer Park" );
+				;;
+				setLocalVarString "ui_info_desc" ( "Medium-sized trailer park with lots of cover and flank routes. Fight from all angles." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_trailerpark" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 188 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_quarry" }
+			exp text ( "@" + "MPUI_QUARRY" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_quarry";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_QUARRY" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_QUARRY" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_quarry" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 208 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_rundown" }
+			exp text ( "@" + "MPUI_RUNDOWN" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_rundown";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_RUNDOWN" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_RUNDOWN" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_rundown" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 228 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_rust" }
+			exp text ( "@" + "MPUI_RUST" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_rust";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_RUST" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_RUST" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_rust" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 248 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_boneyard" }
+			exp text ( "@" + "MPUI_BONEYARD" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_boneyard";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_BONEYARD" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_BONEYARD" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_boneyard" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 268 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_vacant" }
+			exp text ( "Vacant" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_vacant";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Vacant" );
+				;;
+				setLocalVarString "ui_info_desc" ( "Deserted Russian office. Intense interior fighting." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_vacant" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 288 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_subbase" }
+			exp text ( "@" + "MPUI_SUBBASE" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_subbase";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_SUBBASE" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_SUBBASE" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_subbase" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 308 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_terminal" }
+			exp text ( "@" + "MPUI_TERMINAL" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_terminal";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_TERMINAL" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_TERMINAL" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_terminal" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 328 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_storm" }
+			exp text ( "Storm" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_storm";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "Storm" );
+				;;
+				setLocalVarString "ui_info_desc" ( "Stormy warehouse district. Intense team battles." );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_storm" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect -64 348 336 20 1 1
+			visible 1
+			group "mw2_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			dvarTest "ui_mapname"
+			focusDvar { "mp_brecourt" }
+			exp text ( "@" + "MPUI_WASTELAND" )
+			action
+			{
+				play "mouse_click";
+				exec "ui_mapname mp_brecourt";
+				exec "xsessionupdate";
+				close "settings_map";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarFloat "ui_popupYPos" ( getfocuseditemy( ) );
+				;;
+				setLocalVarString "ui_info_name" ( "MPUI_WASTELAND" );
+				;;
+				setLocalVarString "ui_info_desc" ( "MPUI_DESC_MAP_BRECOURT" );
+				;;
+				setLocalVarString "ui_info_icon" ( "preview_mp_brecourt" );
+				;;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 0 0 0 "0.0";
+				setLocalVarString "ui_hint_text" ( "@NULL_EMPTY" );
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect 0 0 272.25 23.5 1 1
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 1
+			textalign 10
+			textalignx -41
+			textaligny -1
+			textscale 0.31
+			text "[{+gostand}]"
+			exp rect y ( getfocuseditemy( ) )
+			visible when ( localvarbool( "ui_menuAButton" ) && !localvarbool( "ui_centerPopup" ) )
+		}
+		itemDef
+		{
+			rect -64 -20 336 24 1 3
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 3
+			textalign 6
+			textalignx -30
+			textscale 0.375
+			text "@PLATFORM_BACK_CAPS"
+			visible when (!dvarint( "gpad_in_use" ))
+		}
+		itemDef
+		{
+			rect -64 -20 336 24 1 3
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 3
+			textalign 6
+			textalignx -30
+			textscale 0.375
+			text "BACK    [{+melee}]"
+			visible when (dvarint( "gpad_in_use" ) && dvarstring("gpad_buttonConfig")=="buttons_tactical")
+		}
+		itemDef
+		{
+			rect -64 -20 336 24 1 3
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 3
+			textalign 6
+			textalignx -30
+			textscale 0.375
+			text "BACK    [{+stance}]"
+			visible when (dvarint( "gpad_in_use" ) && dvarstring("gpad_buttonConfig")=="buttons_default")
+		}
+		itemDef
+		{
+			rect -292 28 292 356 3 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 0.7
+			background "black"
+			textscale 0.55
+		}
+		itemDef
+		{
+			name "mapimage"
+			rect -282 50 272 153 3 1
+			decoration
+			visible 1
+			style 3
+			forecolor 1 1 1 1
+			textscale 0.55
+			exp material ( localvarstring( "ui_info_icon" ) )
+		}
+		itemDef
+		{
+			name "longname"
+			rect -282 28 272 22 3 1
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 9
+			textalign 4
+			textscale 0.375
+			exp text ( "@" + localvarstring( "ui_info_name" ) )
+		}
+		itemDef
+		{
+			name "description"
+			rect -282 203 272 20 3 1
+			decoration
+			autowrapped
+			visible 1
+			forecolor 1 1 1 0.65
+			textfont 3
+			textalign 4
+			textscale 0.375
+			exp text ( "@" + localvarstring( "ui_info_desc" ) )
+		}
+	}
+}
