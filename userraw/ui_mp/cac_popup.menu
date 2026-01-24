@@ -1,3 +1,9 @@
+
+/*
+	IW4X XBOX360 UI made by angxlzj
+*/	
+	
+{
 	menuDef
 	{
 		name "cac_popup"
@@ -1294,3 +1300,4 @@
 			visible when ( localvarbool( "ui_popupAButton" ) && !localvarint( "ui_centerPopup" ) )
 		}
 	}
+}

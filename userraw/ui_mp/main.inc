@@ -1,3 +1,8 @@
+
+/*
+	IW4X XBOX360 UI made by angxlzj
+*/
+
 #undef TEXTSIZE_DEFAULT
 #define TEXTSIZE_DEFAULT 							FONTSCALE_SMALL
 

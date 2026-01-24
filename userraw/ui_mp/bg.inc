@@ -1,3 +1,8 @@
+
+/*
+	IW4X XBOX360 UI made by angxlzj
+*/
+
 #define BACKGROUND_IMAGE(imageArg) \
 itemDef \
 { \

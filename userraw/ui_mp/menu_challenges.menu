@@ -1,3 +1,9 @@
+	
+/*
+	IW4X XBOX360 UI made by angxlzj
+*/	
+
+{
 	menuDef
 	{
 		name "menu_challenges"
@@ -1769,3 +1775,4 @@
 			exp text ( dvarstring( "ui_debug_localVarBool" ) + ": " + localvarbool( dvarstring( "ui_debug_localVarBool" ) ) )
 		}
 	}
+}

@@ -1,8 +1,9 @@
-#include "ui/menudef.h"
 
 /*
-	XBOX360/PS3 UI reload button fix by angxlzj
+	IW4X XBOX360 UI made by angxlzj
 */
+
+#include "ui/menudef.h"
 
 {
 	menuDef
